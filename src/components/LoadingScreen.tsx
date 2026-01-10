@@ -9,6 +9,10 @@ export default function LoadingScreen() {
   const [phase, setPhase] = useState<"logo" | "splash">("logo");
 
   useEffect(() => {
+    // Reset animations on every mount (fresh page load)
+    setShow(true);
+    setPhase("logo");
+
     // Logo animation phase: 3 seconds
     const logoTimer = setTimeout(() => {
       setPhase("splash");
@@ -23,7 +27,7 @@ export default function LoadingScreen() {
       clearTimeout(logoTimer);
       clearTimeout(splashTimer);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs on every component mount
 
   if (!show) return null;
 
