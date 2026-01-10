@@ -43,11 +43,22 @@ export default function AdminDashboard() {
     }
   }, [router]);
 
-  const loadProducts = () => {
-    const stored = localStorage.getItem("products");
-    if (stored) {
-      setProducts(JSON.parse(stored));
-    } else {
+  const loadProducts = async () => {
+    try {
+      const response = await fetch('/api/products');
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data);
+      }
+    } catch (error) {
+      console.error('Failed to load products:', error);
+      // Fallback to localStorage for backward compatibility
+      const stored = localStorage.getItem("products");
+      if (stored) {
+        setProducts(JSON.parse(stored));
+      }
+    }
+  };
       // Initial products
       const initialProducts: Product[] = [
         {
