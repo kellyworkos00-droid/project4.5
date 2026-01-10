@@ -152,6 +152,23 @@ export default function AdminDashboard() {
     setEditingProduct(null);
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && editingProduct) {
+      // Check file size (max 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Image size should be less than 2MB");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditingProduct({ ...editingProduct, image: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleDeleteProduct = (id: number) => {
     if (confirm("Are you sure you want to delete this product?")) {
       const updatedProducts = products.filter(p => p.id !== id);
@@ -354,20 +371,57 @@ export default function AdminDashboard() {
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2 font-semibold">Image URL</label>
+                <label className="block text-gray-700 mb-2 font-semibold">Product Image</label>
+                
+                {/* File Upload Option */}
+                <div className="mb-3">
+                  <label className="block w-full cursor-pointer">
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                      <div className="text-gray-600">
+                        <svg className="mx-auto h-12 w-12 text-gray-400 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <p className="text-sm font-semibold">Click to upload from device</p>
+                        <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 2MB</p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                {/* OR divider */}
+                <div className="flex items-center my-3">
+                  <div className="flex-1 border-t border-gray-300"></div>
+                  <span className="px-3 text-gray-500 text-sm">OR</span>
+                  <div className="flex-1 border-t border-gray-300"></div>
+                </div>
+
+                {/* URL Input Option */}
                 <input
                   type="text"
                   value={editingProduct.image}
                   onChange={(e) => setEditingProduct({ ...editingProduct, image: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
-                  placeholder="https://example.com/image.jpg"
+                  placeholder="Or paste image URL"
                 />
+                
                 {editingProduct.image && (
-                  <img 
-                    src={editingProduct.image} 
-                    alt="Preview" 
-                    className="mt-2 w-32 h-32 object-cover rounded-lg"
-                  />
+                  <div className="mt-3">
+                    <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                    <img 
+                      src={editingProduct.image} 
+                      alt="Preview" 
+                      className="w-full max-w-xs h-48 object-cover rounded-lg border-2 border-gray-200"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://via.placeholder.com/300x200?text=Invalid+Image";
+                      }}
+                    />
+                  </div>
                 )}
               </div>
 
