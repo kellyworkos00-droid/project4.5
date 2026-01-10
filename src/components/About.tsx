@@ -32,8 +32,8 @@ export default function About() {
             Why Choose Supacoat?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We provide exceptional coating solutions backed by years of expertise 
-            and commitment to quality. Your satisfaction is our priority.
+            As Kenya's premier wholesale hardware supplier, we provide exceptional products 
+            and service to contractors, builders, and businesses. Your success is our priority.
           </p>
         </div>
 
@@ -58,10 +58,10 @@ export default function About() {
 
         <div className="bg-gradient-to-r from-blue-900 to-blue-700 rounded-3xl p-12 text-white text-center">
           <h3 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Transform Your Space?
+            Ready to Stock Quality Hardware?
           </h3>
           <p className="text-xl mb-8 text-blue-100">
-            Get in touch with us today for expert advice and premium products
+            Get in touch with us today for wholesale pricing and bulk orders
           </p>
           <a
             href="#contact"

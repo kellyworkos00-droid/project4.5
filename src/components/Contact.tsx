@@ -60,7 +60,7 @@ export default function Contact() {
               <MapPin className="w-8 h-8 text-red-600 group-hover:text-white" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-gray-900">Location</h3>
-            <p className="text-gray-600">Serving Your Area</p>
+            <p className="text-gray-600">Kenya</p>
           </div>
         </div>
 

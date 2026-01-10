@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Supacoat - Premium Coating Solutions",
-  description: "Discover premium coating and paint products for all your needs. Quality products with expert support.",
+  title: "Supacoat - Wholesale Hardware Supplier Kenya",
+  description: "Leading wholesale hardware supplier in Kenya. Quality paints, coatings, building materials and hardware at competitive prices. Serving contractors and businesses nationwide.",
 };
 
 export default function RootLayout({

@@ -10,8 +10,8 @@ export default function Footer() {
           <div>
             <img src="/logo.png" alt="Supacoat Logo" className="h-12 w-auto mb-4" />
             <p className="text-gray-400">
-              Your trusted partner for premium coating solutions. Quality products, 
-              exceptional service.
+              Kenya's trusted wholesale hardware supplier. Quality products, 
+              competitive prices, exceptional service for contractors and businesses.
             </p>
           </div>
 
