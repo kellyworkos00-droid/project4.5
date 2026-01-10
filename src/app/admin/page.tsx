@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 
 export default function AdminLogin() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
@@ -19,12 +20,12 @@ export default function AdminLogin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple password authentication (in production, use proper backend auth)
-    if (password === "supacoat2026") {
+    // Authentication with specific email and password
+    if (email === "supacoatinvestmentltd@gmail.com" && password === "q123456789P") {
       localStorage.setItem("adminAuth", "true");
       router.push("/admin/dashboard");
     } else {
-      setError("Invalid password");
+      setError("Invalid email or password");
       setPassword("");
     }
   };
@@ -42,6 +43,20 @@ export default function AdminLogin() {
         <p className="text-center text-gray-600 mb-8">Enter password to access dashboard</p>
 
         <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label className="block text-gray-700 mb-2 font-semibold">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError("");
+              }}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+              placeholder="Enter admin email"
+              required
+            />
+          </div>
           <div>
             <label className="block text-gray-700 mb-2 font-semibold">Password</label>
             <input
@@ -69,8 +84,7 @@ export default function AdminLogin() {
         </form>
 
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>Default password: supacoat2026</p>
-          <p className="mt-2">Change this in production!</p>
+          <p>Authorized access only</p>
         </div>
       </div>
     </div>
