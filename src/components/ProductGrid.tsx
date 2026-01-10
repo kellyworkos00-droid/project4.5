@@ -2,6 +2,7 @@
 
 import { ShoppingCart, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -151,7 +152,8 @@ export default function ProductGrid() {
                 key={product.id}
                 className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
               >
-              <div className="relative h-32 md:h-64 overflow-hidden group">
+              <Link href={`/product/${product.id}`}>
+              <div className="relative h-32 md:h-64 overflow-hidden group cursor-pointer">
                 <img
                   src={images[currentIndex]}
                   alt={product.name}
@@ -191,11 +193,14 @@ export default function ProductGrid() {
                   </>
                 )}
               </div>
+              </Link>
               
               <div className="p-2 md:p-6">
-                <h3 className="text-xs md:text-2xl font-bold mb-1 md:mb-2 text-gray-900 line-clamp-2">
+                <Link href={`/product/${product.id}`}>
+                <h3 className="text-xs md:text-2xl font-bold mb-1 md:mb-2 text-gray-900 line-clamp-2 hover:text-blue-600 transition cursor-pointer">
                   {product.name}
                 </h3>
+                </Link>
                 
                 <div className="flex items-center mb-1 md:mb-3">
                   {[...Array(product.rating)].map((_, i) => (
