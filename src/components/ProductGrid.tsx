@@ -113,47 +113,47 @@ export default function ProductGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
             >
-              <div className="relative h-40 md:h-64 overflow-hidden">
+              <div className="relative h-32 md:h-64 overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-blue-600 text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
+                <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-blue-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold">
                   {product.category}
                 </div>
               </div>
               
-              <div className="p-3 md:p-6">
-                <h3 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-gray-900">
+              <div className="p-2 md:p-6">
+                <h3 className="text-xs md:text-2xl font-bold mb-1 md:mb-2 text-gray-900 line-clamp-2">
                   {product.name}
                 </h3>
                 
-                <div className="flex items-center mb-2 md:mb-3">
+                <div className="flex items-center mb-1 md:mb-3">
                   {[...Array(product.rating)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-yellow-400 text-yellow-400 md:w-[18px] md:h-[18px]" />
+                    <Star key={i} size={10} className="fill-yellow-400 text-yellow-400 md:w-[18px] md:h-[18px]" />
                   ))}
                 </div>
 
-                <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4">
+                <p className="text-[10px] md:text-base text-gray-600 mb-2 md:mb-4 line-clamp-2">
                   {product.description}
                 </p>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-base md:text-2xl font-bold text-blue-600">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-1 md:gap-0">
+                  <span className="text-xs md:text-2xl font-bold text-blue-600">
                     {product.price}
                   </span>
                   <button
                     onClick={() => handleOrderClick(product.name)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-semibold flex items-center gap-1 md:gap-2 transition"
+                    className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 md:px-6 md:py-3 rounded-full text-[10px] md:text-base font-semibold flex items-center gap-1 md:gap-2 transition w-full md:w-auto justify-center"
                   >
-                    <ShoppingCart size={16} className="md:w-[18px] md:h-[18px]" />
+                    <ShoppingCart size={12} className="md:w-[18px] md:h-[18px]" />
                     Order
                   </button>
                 </div>
