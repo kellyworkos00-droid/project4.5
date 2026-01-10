@@ -59,67 +59,6 @@ export default function AdminDashboard() {
       }
     }
   };
-      // Initial products
-      const initialProducts: Product[] = [
-        {
-          id: 1,
-          name: "Premium Interior Paint",
-          description: "Smooth finish for walls and ceilings",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Interior"
-        },
-        {
-          id: 2,
-          name: "Weather-Guard Exterior",
-          description: "All-weather protection coating",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Exterior"
-        },
-        {
-          id: 3,
-          name: "Wood Stain & Varnish",
-          description: "Enhance natural wood beauty",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1604076947026-8e9ee7eca26f?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Wood"
-        },
-        {
-          id: 4,
-          name: "Industrial Coating",
-          description: "Heavy-duty protection",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Industrial"
-        },
-        {
-          id: 5,
-          name: "Anti-Rust Metal Primer",
-          description: "Prevent corrosion effectively",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Primer"
-        },
-        {
-          id: 6,
-          name: "Epoxy Floor Coating",
-          description: "Durable floor protection",
-          price: "Contact for Price",
-          image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=500&auto=format&fit=crop&q=60",
-          rating: 5,
-          category: "Specialty"
-        }
-      ];
-      setProducts(initialProducts);
-      localStorage.setItem("products", JSON.stringify(initialProducts));
-    }
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("adminAuth");
@@ -240,14 +179,6 @@ export default function AdminDashboard() {
       ...editingProduct,
       image: imageUrl
     });
-  };
-
-  const handleDeleteProduct = (id: number) => {
-    if (confirm("Are you sure you want to delete this product?")) {
-      const updatedProducts = products.filter(p => p.id !== id);
-      setProducts(updatedProducts);
-      localStorage.setItem("products", JSON.stringify(updatedProducts));
-    }
   };
 
   if (!isAuthenticated) {
