@@ -115,6 +115,12 @@ export default function AdminDashboard() {
           rating: 5,
           category: "Specialty"
         }
+      ];
+      setProducts(initialProducts);
+      localStorage.setItem("products", JSON.stringify(initialProducts));
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("adminAuth");
     router.push("/admin");

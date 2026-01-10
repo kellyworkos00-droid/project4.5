@@ -187,8 +187,7 @@ export default function ProductGrid() {
                           }`}
                         />
                       ))}
-           ;
-          }         </div>
+                    </div>
                   </>
                 )}
               </div>
