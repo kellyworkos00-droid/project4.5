@@ -13,10 +13,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Hide loading after animation completes
+    // Hide loading after animation completes (logo 3s + splash 2.5s = 5.5s)
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 5500);
 
     return () => clearTimeout(timer);
   }, []);
