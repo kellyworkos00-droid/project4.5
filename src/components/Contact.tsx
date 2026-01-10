@@ -26,8 +26,8 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 text-center group"
           >
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition">
-              <MessageCircle className="w-8 h-8 text-green-600 group-hover:text-white" />
+            <div className="bg-green-100 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition">
+              <MessageCircle className="w-6 h-6 md:w-8 md:h-8 text-green-600 group-hover:text-white" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-gray-900">WhatsApp</h3>
             <p className="text-gray-600">Chat with us instantly</p>
@@ -37,8 +37,8 @@ export default function Contact() {
             href={`tel:${whatsappNumber}`}
             className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 text-center group"
           >
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition">
-              <Phone className="w-8 h-8 text-blue-600 group-hover:text-white" />
+            <div className="bg-blue-100 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition">
+              <Phone className="w-6 h-6 md:w-8 md:h-8 text-blue-600 group-hover:text-white" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-gray-900">Phone</h3>
             <p className="text-gray-600">{phoneNumber}</p>
@@ -48,16 +48,16 @@ export default function Contact() {
             href={`mailto:${email}`}
             className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 text-center group"
           >
-            <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500 transition">
-              <Mail className="w-8 h-8 text-purple-600 group-hover:text-white" />
+            <div className="bg-purple-100 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500 transition">
+              <Mail className="w-6 h-6 md:w-8 md:h-8 text-purple-600 group-hover:text-white" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-gray-900">Email</h3>
             <p className="text-gray-600">{email}</p>
           </a>
 
           <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 text-center group">
-            <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-500 transition">
-              <MapPin className="w-8 h-8 text-red-600 group-hover:text-white" />
+            <div className="bg-red-100 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-500 transition">
+              <MapPin className="w-6 h-6 md:w-8 md:h-8 text-red-600 group-hover:text-white" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-gray-900">Location</h3>
             <p className="text-gray-600">Kenya</p>
