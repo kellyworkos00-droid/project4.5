@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 export default function Footer() {
-  const whatsappNumber = "1234567890"; // Replace with actual number
+  const whatsappNumber = "0703771771";
 
   return (
     <footer className="bg-gray-900 text-white py-12">

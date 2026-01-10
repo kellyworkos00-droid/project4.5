@@ -3,9 +3,9 @@
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Contact() {
-  const whatsappNumber = "1234567890"; // Replace with actual WhatsApp number
-  const phoneNumber = "+1 (234) 567-890"; // Replace with actual phone
-  const email = "info@supacoat.com"; // Replace with actual email
+  const whatsappNumber = "0703771771";
+  const phoneNumber = "0703771771";
+  const email = "supacoatinvestmentltd@gmail.com";
 
   return (
     <section id="contact" className="py-20 bg-gray-50">

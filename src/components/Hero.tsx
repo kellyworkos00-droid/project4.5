@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const whatsappNumber = "1234567890"; // Replace with actual number
+  const whatsappNumber = "0703771771";
   const whatsappMessage = encodeURIComponent("Hello! I'm interested in your coating products.");
 
   return (

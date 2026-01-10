@@ -72,7 +72,7 @@ const defaultProducts: Product[] = [
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[]>(defaultProducts);
-  const whatsappNumber = "1234567890"; // Replace with actual number
+  const whatsappNumber = "0703771771";
 
   useEffect(() => {
     // Load products from localStorage (managed by admin panel)
