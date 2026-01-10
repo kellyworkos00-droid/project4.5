@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -9,6 +9,7 @@ interface Product {
   description: string;
   price: string;
   image: string;
+  images?: string[];
   rating: number;
   category: string;
 }
@@ -72,6 +73,7 @@ const defaultProducts: Product[] = [
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[]>(defaultProducts);
+  const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
   const whatsappNumber = "0703771771";
 
   useEffect(() => {
@@ -101,6 +103,26 @@ export default function ProductGrid() {
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };
 
+  const nextImage = (productId: number, totalImages: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex(prev => ({
+      ...prev,
+      [productId]: ((prev[productId] || 0) + 1) % totalImages
+    }));
+  };
+
+  const prevImage = (productId: number, totalImages: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex(prev => ({
+      ...prev,
+      [productId]: ((prev[productId] || 0) - 1 + totalImages) % totalImages
+    }));
+  };
+
+  const getProductImages = (product: Product): string[] => {
+    return product.images && product.images.length > 0 ? product.images : [product.image];
+  };
+
   return (
     <section id="products" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -114,20 +136,55 @@ export default function ProductGrid() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
-          {products.map((product) => (
+          {products.map((product) => {
+            const images = getProductImages(product);
+            const currentIndex = currentImageIndex[product.id] || 0;
+            
+            return (
             <div
               key={product.id}
               className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
             >
-              <div className="relative h-32 md:h-64 overflow-hidden">
+              <div className="relative h-32 md:h-64 overflow-hidden group">
                 <img
-                  src={product.image}
+                  src={images[currentIndex]}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-blue-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold">
                   {product.category}
                 </div>
+                
+                {/* Image Navigation */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => prevImage(product.id, images.length, e)}
+                      className="absolute left-1 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                    >
+                      <ChevronLeft size={16} className="md:w-6 md:h-6" />
+                    </button>
+                    <button
+                      onClick={(e) => nextImage(product.id, images.length, e)}
+                      className="absolute right-1 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                    >
+                      <ChevronRight size={16} className="md:w-6 md:h-6" />
+                    </button>
+                    
+                    {/* Image dots indicator */}
+                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1">
+                      {images.map((_, idx) => (
+                        <div
+                          key={idx}
+                          className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition ${
+                            idx === currentIndex ? 'bg-white' : 'bg-white/50'
+                          }`}
+                        />
+                      ))}
+           ;
+          }         </div>
+                  </>
+                )}
               </div>
               
               <div className="p-2 md:p-6">

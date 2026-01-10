@@ -20,6 +20,7 @@ interface Product {
   description: string;
   price: string;
   image: string;
+  images?: string[]; // Multiple images support
   rating: number;
   category: string;
 }
@@ -153,20 +154,56 @@ export default function AdminDashboard() {
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && editingProduct) {
-      // Check file size (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Image size should be less than 2MB");
-        return;
-      }
+    const files = e.target.files;
+    if (files && editingProduct) {
+      const fileArray = Array.from(files);
+      
+      // Process all selected images
+      const imagePromises = fileArray.map(file => {
+        return new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result as string);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditingProduct({ ...editingProduct, image: reader.result as string });
-      };
-      reader.readAsDataURL(file);
+      Promise.all(imagePromises).then(imageResults => {
+        const currentImages = editingProduct.images || [];
+        const allImages = [...currentImages, ...imageResults];
+        
+        // Set first image as main image if not set
+        const mainImage = editingProduct.image || allImages[0];
+        
+        setEditingProduct({ 
+          ...editingProduct, 
+          image: mainImage,
+          images: allImages 
+        });
+      });
     }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    if (!editingProduct || !editingProduct.images) return;
+    
+    const newImages = editingProduct.images.filter((_, i) => i !== index);
+    const mainImage = newImages.length > 0 ? newImages[0] : "";
+    
+    setEditingProduct({
+      ...editingProduct,
+      image: mainImage,
+      images: newImages
+    });
+  };
+
+  const handleSetMainImage = (imageUrl: string) => {
+    if (!editingProduct) return;
+    setEditingProduct({
+      ...editingProduct,
+      image: imageUrl
+    });
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -371,7 +408,7 @@ export default function AdminDashboard() {
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2 font-semibold">Product Image</label>
+                <label className="block text-gray-700 mb-2 font-semibold">Product Images</label>
                 
                 {/* File Upload Option */}
                 <div className="mb-3">
@@ -380,6 +417,7 @@ export default function AdminDashboard() {
                       <input
                         type="file"
                         accept="image/*"
+                        multiple
                         onChange={handleImageUpload}
                         className="hidden"
                       />
@@ -387,12 +425,55 @@ export default function AdminDashboard() {
                         <svg className="mx-auto h-12 w-12 text-gray-400 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                           <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <p className="text-sm font-semibold">Click to upload from device</p>
-                        <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 2MB</p>
+                        <p className="text-sm font-semibold">Click to upload multiple images</p>
+                        <p className="text-xs text-gray-500 mt-1">Select one or more images (any size)</p>
                       </div>
                     </div>
                   </label>
                 </div>
+
+                {/* Image Gallery Preview */}
+                {editingProduct.images && editingProduct.images.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-700 mb-2 font-semibold">
+                      Uploaded Images ({editingProduct.images.length})
+                    </p>
+                    <div className="grid grid-cols-3 gap-3">
+                      {editingProduct.images.map((img, index) => (
+                        <div key={index} className="relative group">
+                          <img 
+                            src={img} 
+                            alt={`Product ${index + 1}`}
+                            className={`w-full h-32 object-cover rounded-lg border-2 ${
+                              editingProduct.image === img 
+                                ? 'border-blue-500' 
+                                : 'border-gray-200'
+                            } cursor-pointer hover:border-blue-400 transition`}
+                            onClick={() => handleSetMainImage(img)}
+                            onError={(e) => {
+                              e.currentTarget.src = "https://via.placeholder.com/300x200?text=Invalid+Image";
+                            }}
+                          />
+                          {editingProduct.image === img && (
+                            <div className="absolute top-1 left-1 bg-blue-500 text-white text-xs px-2 py-1 rounded">
+                              Main
+                            </div>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Click an image to set as main image. Hover and click X to remove.
+                    </p>
+                  </div>
+                )}
 
                 {/* OR divider */}
                 <div className="flex items-center my-3">
@@ -409,20 +490,6 @@ export default function AdminDashboard() {
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
                   placeholder="Or paste image URL"
                 />
-                
-                {editingProduct.image && (
-                  <div className="mt-3">
-                    <p className="text-sm text-gray-600 mb-2">Preview:</p>
-                    <img 
-                      src={editingProduct.image} 
-                      alt="Preview" 
-                      className="w-full max-w-xs h-48 object-cover rounded-lg border-2 border-gray-200"
-                      onError={(e) => {
-                        e.currentTarget.src = "https://via.placeholder.com/300x200?text=Invalid+Image";
-                      }}
-                    />
-                  </div>
-                )}
               </div>
 
               <div>
