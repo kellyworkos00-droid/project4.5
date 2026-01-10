@@ -9,12 +9,12 @@ export default function Hero() {
   const whatsappMessage = encodeURIComponent("Hello! I'm interested in your coating products.");
 
   return (
-    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white">
+    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white overflow-hidden">
       {/* Navigation */}
-      <nav className="container mx-auto px-4 py-6">
+      <nav className="container mx-auto px-4 py-4 md:py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <img src="/logo.png" alt="Supacoat Logo" className="h-12 md:h-16 w-auto" />
+            <img src="/logo.png" alt="Supacoat Logo" className="h-10 md:h-16 w-auto" />
           </div>
           
           {/* Desktop Menu */}
@@ -26,35 +26,35 @@ export default function Hero() {
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full font-semibold flex items-center gap-2 transition"
+              className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full font-semibold flex items-center gap-2 transition text-sm"
             >
-              <ShoppingCart size={18} />
+              <ShoppingCart size={16} />
               Order Now
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4">
-            <a href="#products" className="block hover:text-blue-300 transition">Products</a>
-            <a href="#about" className="block hover:text-blue-300 transition">About</a>
-            <a href="#contact" className="block hover:text-blue-300 transition">Contact</a>
+          <div className="md:hidden mt-4 pb-4 space-y-3">
+            <a href="#products" className="block hover:text-blue-300 transition text-sm" onClick={() => setMobileMenuOpen(false)}>Products</a>
+            <a href="#about" className="block hover:text-blue-300 transition text-sm" onClick={() => setMobileMenuOpen(false)}>About</a>
+            <a href="#contact" className="block hover:text-blue-300 transition text-sm" onClick={() => setMobileMenuOpen(false)}>Contact</a>
             <a
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full font-semibold inline-flex items-center gap-2 transition"
+              className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-full font-semibold inline-flex items-center gap-2 transition text-sm"
             >
-              <ShoppingCart size={18} />
+              <ShoppingCart size={16} />
               Order Now
             </a>
           </div>
@@ -62,19 +62,19 @@ export default function Hero() {
       </nav>
 
       {/* Hero Content */}
-      <div className="container mx-auto px-4 py-20 md:py-32">
+      <div className="container mx-auto px-4 py-12 md:py-32">
         <div className="max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight">
             Kenya's Leading Wholesale Hardware Supplier
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
+          <p className="text-base md:text-2xl mb-6 md:mb-8 text-blue-100 leading-relaxed">
             Your trusted partner for quality hardware, paints, coatings, and building materials. 
             Serving contractors, builders, and businesses across Kenya with competitive wholesale prices.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
             <a
               href="#products"
-              className="bg-white text-blue-900 hover:bg-blue-50 px-8 py-4 rounded-full font-bold text-lg transition text-center"
+              className="bg-white text-blue-900 hover:bg-blue-50 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg transition text-center"
             >
               Browse Products
             </a>
@@ -82,9 +82,9 @@ export default function Hero() {
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 px-8 py-4 rounded-full font-bold text-lg transition flex items-center justify-center gap-2"
+              className="bg-green-500 hover:bg-green-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg transition flex items-center justify-center gap-2"
             >
-              <ShoppingCart size={22} />
+              <ShoppingCart size={18} className="md:w-[22px] md:h-[22px]" />
               WhatsApp Order
             </a>
           </div>
