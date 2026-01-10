@@ -63,49 +63,6 @@ export default function Contact() {
             <p className="text-gray-600">Kenya</p>
           </div>
         </div>
-
-        <div className="mt-16 max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
-          <h3 className="text-2xl font-bold mb-6 text-center text-gray-900">
-            Quick Contact Form
-          </h3>
-          <form className="space-y-4">
-            <div>
-              <label className="block text-gray-700 mb-2 font-semibold">Name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2 font-semibold">Phone</label>
-              <input
-                type="tel"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
-                placeholder="Your phone number"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2 font-semibold">Message</label>
-              <textarea
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
-                placeholder="Tell us about your project"
-              ></textarea>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                const message = encodeURIComponent("I would like to inquire about your products");
-                window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-              }}
-              className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-lg transition flex items-center justify-center gap-2"
-            >
-              <MessageCircle size={20} />
-              Send via WhatsApp
-            </button>
-          </form>
-        </div>
       </div>
     </section>
   );
