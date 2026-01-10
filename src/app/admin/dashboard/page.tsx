@@ -115,12 +115,6 @@ export default function AdminDashboard() {
           rating: 5,
           category: "Specialty"
         }
-      ];
-      setProducts(initialProducts);
-      localStorage.setItem("products", JSON.stringify(initialProducts));
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("adminAuth");
     router.push("/admin");
@@ -146,22 +140,47 @@ export default function AdminDashboard() {
     setIsEditing(true);
   };
 
-  const handleSaveProduct = () => {
+  const handleSaveProduct = async () => {
     if (!editingProduct) return;
 
-    let updatedProducts;
-    if (isEditing) {
-      updatedProducts = products.map(p => 
-        p.id === editingProduct.id ? editingProduct : p
-      );
-    } else {
-      updatedProducts = [...products, editingProduct];
-    }
+    try {
+      const method = isEditing ? 'PUT' : 'POST';
+      const response = await fetch('/api/products', {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editingProduct),
+      });
 
-    setProducts(updatedProducts);
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
-    setShowForm(false);
-    setEditingProduct(null);
+      if (response.ok) {
+        await loadProducts();
+        setShowForm(false);
+        setEditingProduct(null);
+      } else {
+        throw new Error('Failed to save');
+      }
+    } catch (error) {
+      console.error('Failed to save product:', error);
+      alert('Failed to save product. Please try again.');
+    }
+  };
+
+  const handleDeleteProduct = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this product?")) return;
+
+    try {
+      const response = await fetch(`/api/products?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        await loadProducts();
+      } else {
+        throw new Error('Failed to delete');
+      }
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+      alert('Failed to delete product. Please try again.');
+    }
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

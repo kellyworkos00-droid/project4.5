@@ -12,6 +12,7 @@ interface Product {
   images?: string[];
   rating: number;
   category: string;
+  created_at?: string;
 }
 
 const defaultProducts: Product[] = [
@@ -77,26 +78,31 @@ export default function ProductGrid() {
   const whatsappNumber = "0703771771";
 
   useEffect(() => {
-    // Load products from localStorage (managed by admin panel)
-    const stored = localStorage.getItem("products");
-    if (stored) {
-      setProducts(JSON.parse(stored));
-    } else {
-      // Save default products if none exist
-      localStorage.setItem("products", JSON.stringify(defaultProducts));
-    }
-
-    // Listen for product updates
-    const handleStorageChange = () => {
-      const updated = localStorage.getItem("products");
-      if (updated) {
-        setProducts(JSON.parse(updated));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    loadProducts();
+    
+    // Refresh products every 5 seconds to catch updates
+    const interval = setInterval(loadProducts, 5000);
+    return () => clearInterval(interval);
   }, []);
+
+  const loadProducts = async () => {
+    try {
+      const response = await fetch('/api/products');
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.length > 0) {
+          setProducts(data);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load products:', error);
+      // Fallback to localStorage if API fails
+      const stored = localStorage.getItem("products");
+      if (stored) {
+        setProducts(JSON.parse(stored));
+      }
+    }
+  };
 
   const handleOrderClick = (productName: string) => {
     const message = encodeURIComponent(`Hi! I'm interested in ordering: ${productName}`);
