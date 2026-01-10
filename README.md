@@ -44,7 +44,7 @@ npm install
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](https://project4-5-1tz3.vercel.app/) in your browser
 
 ## Configuration
 
