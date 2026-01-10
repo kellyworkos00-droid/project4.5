@@ -147,10 +147,10 @@ export default function ProductGrid() {
             const currentIndex = currentImageIndex[product.id] || 0;
             
             return (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
-            >
+              <div
+                key={product.id}
+                className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
+              >
               <div className="relative h-32 md:h-64 overflow-hidden group">
                 <img
                   src={images[currentIndex]}
@@ -221,7 +221,8 @@ export default function ProductGrid() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
