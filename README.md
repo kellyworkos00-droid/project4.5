@@ -1,6 +1,8 @@
 # Supacoat E-commerce Website
 
-A modern, responsive e-commerce website for Supacoat - your premium coating solutions provider.
+A modern, responsive e-commerce website for Supacoat - wholesale hardware supplier in Kenya.
+
+Built with Next.js 15.5.9, TypeScript, Tailwind CSS, and Neon PostgreSQL.
 
 ## Features
 
