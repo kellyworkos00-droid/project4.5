@@ -96,7 +96,7 @@ export default function Contact() {
             <button
               type="button"
               onClick={() => {
-                const message = encodeURIComponent("I'd like to inquire about your products");
+                const message = encodeURIComponent("I would like to inquire about your products");
                 window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
               }}
               className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-lg transition flex items-center justify-center gap-2"
