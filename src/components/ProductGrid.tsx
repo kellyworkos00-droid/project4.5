@@ -76,6 +76,7 @@ const defaultProducts: Product[] = [
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[]>(defaultProducts);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
+  const [loading, setLoading] = useState(true);
   const whatsappNumber = "0703771771";
 
   useEffect(() => {
@@ -142,6 +143,20 @@ export default function ProductGrid() {
           </p>
         </div>
 
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <div key={n} className="bg-white rounded-lg md:rounded-2xl shadow-md overflow-hidden animate-pulse">
+                <div className="h-32 md:h-64 bg-gray-300"></div>
+                <div className="p-2 md:p-6 space-y-2 md:space-y-4">
+                  <div className="h-4 md:h-6 bg-gray-300 rounded w-3/4"></div>
+                  <div className="h-3 md:h-4 bg-gray-300 rounded w-1/2"></div>
+                  <div className="h-8 md:h-10 bg-gray-300 rounded"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
           {products.map((product) => {
             const images = getProductImages(product);
@@ -229,6 +244,7 @@ export default function ProductGrid() {
             );
           })}
         </div>
+        )}
       </div>
     </section>
   );
