@@ -52,7 +52,7 @@ export default function AdminLogin() {
                 setEmail(e.target.value);
                 setError("");
               }}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
               placeholder="Enter admin email"
               required
             />
@@ -66,7 +66,7 @@ export default function AdminLogin() {
                 setPassword(e.target.value);
                 setError("");
               }}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
               placeholder="Enter admin password"
               required
             />

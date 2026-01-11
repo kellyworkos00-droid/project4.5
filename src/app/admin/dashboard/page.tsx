@@ -88,6 +88,24 @@ export default function AdminDashboard() {
   const handleSaveProduct = async () => {
     if (!editingProduct) return;
 
+    // Validation
+    if (!editingProduct.name.trim()) {
+      alert('Please enter a product name');
+      return;
+    }
+    if (!editingProduct.description.trim()) {
+      alert('Please enter a product description');
+      return;
+    }
+    if (!editingProduct.category.trim()) {
+      alert('Please enter a product category');
+      return;
+    }
+    if (!editingProduct.image && (!editingProduct.images || editingProduct.images.length === 0)) {
+      alert('Please upload at least one image');
+      return;
+    }
+
     try {
       const method = isEditing ? 'PUT' : 'POST';
       const response = await fetch('/api/products', {
@@ -100,12 +118,14 @@ export default function AdminDashboard() {
         await loadProducts();
         setShowForm(false);
         setEditingProduct(null);
+        alert('Product saved successfully!');
       } else {
-        throw new Error('Failed to save');
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to save');
       }
     } catch (error) {
       console.error('Failed to save product:', error);
-      alert('Failed to save product. Please try again.');
+      alert(`Failed to save product: ${error instanceof Error ? error.message : 'Please check your database connection and try again.'}`);
     }
   };
 
@@ -334,7 +354,7 @@ export default function AdminDashboard() {
                   type="text"
                   value={editingProduct.name}
                   onChange={(e) => setEditingProduct({ ...editingProduct, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
                   placeholder="e.g., Premium Interior Paint"
                 />
               </div>
@@ -344,7 +364,7 @@ export default function AdminDashboard() {
                 <textarea
                   value={editingProduct.description}
                   onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
                   rows={3}
                   placeholder="Brief description"
                 />
@@ -357,7 +377,7 @@ export default function AdminDashboard() {
                     type="text"
                     value={editingProduct.category}
                     onChange={(e) => setEditingProduct({ ...editingProduct, category: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
                     placeholder="e.g., Interior"
                   />
                 </div>
@@ -368,7 +388,7 @@ export default function AdminDashboard() {
                     type="text"
                     value={editingProduct.price}
                     onChange={(e) => setEditingProduct({ ...editingProduct, price: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-900"
                     placeholder="e.g., $99 or Contact for Price"
                   />
                 </div>
