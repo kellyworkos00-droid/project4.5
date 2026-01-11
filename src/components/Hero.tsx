@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, CheckCircle2, Star, Package, Truck } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -98,6 +98,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
+            <CheckCircle2 className="w-4 h-4 text-green-400" />
             <span className="text-sm font-semibold">Trusted by 500+ Businesses</span>
           </div>
 
@@ -119,15 +120,15 @@ export default function Hero() {
           {/* Features List */}
           <div className="flex flex-wrap gap-4 mb-10 animate-fade-in-up delay-300">
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-              <span className="text-2xl">✓</span>
+              <CheckCircle2 className="w-5 h-5 text-green-400" />
               <span className="font-semibold">100% Quality Assured</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-              <span className="text-2xl">✓</span>
+              <Truck className="w-5 h-5 text-blue-300" />
               <span className="font-semibold">Fast Delivery</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-              <span className="text-2xl">✓</span>
+              <Package className="w-5 h-5 text-purple-300" />
               <span className="font-semibold">Wholesale Prices</span>
             </div>
           </div>
@@ -159,15 +160,15 @@ export default function Hero() {
           {/* Trust Indicators */}
           <div className="mt-12 flex flex-wrap items-center gap-6 text-sm text-blue-100 animate-fade-in-up delay-500">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">⭐</span>
+              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
               <span><strong className="text-white">4.9/5</strong> Customer Rating</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-2xl">📦</span>
+              <Package className="w-5 h-5 text-blue-300" />
               <span><strong className="text-white">10,000+</strong> Orders Delivered</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🚚</span>
+              <Truck className="w-5 h-5 text-green-300" />
               <span><strong className="text-white">Same Day</strong> Dispatch</span>
             </div>
           </div>

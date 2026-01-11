@@ -1,6 +1,6 @@
 "use client";
 
-import { Star } from 'lucide-react';
+import { Star, MessageSquare } from 'lucide-react';
 
 const testimonials = [
   {
@@ -41,8 +41,9 @@ export default function Testimonials() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-16">
           <div className="inline-block mb-4">
-            <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-              💬 Testimonials
+            <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
+              <MessageSquare className="w-4 h-4" />
+              Testimonials
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-white drop-shadow-lg">

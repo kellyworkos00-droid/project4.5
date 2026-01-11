@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Search, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -271,8 +271,9 @@ export default function ProductGrid() {
                 </div>
                 
                 {/* New badge */}
-                <div className="absolute top-1 left-1 md:top-4 md:left-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-bold shadow-lg">
-                  ⚡ HOT
+                <div className="absolute top-1 left-1 md:top-4 md:left-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-bold shadow-lg flex items-center gap-1">
+                  <Zap className="w-3 h-3 md:w-4 md:h-4 fill-white" />
+                  HOT
                 </div>
                 
                 {/* Image Navigation */}

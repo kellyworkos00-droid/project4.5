@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { CheckCircle, Award, Shield, Sparkles, TrendingUp, Users, Truck } from "lucide-react";
+import { CheckCircle, Award, Shield, Sparkles, TrendingUp, Users, Truck, Zap } from "lucide-react";
 
 export default function About() {
   const [counters, setCounters] = useState({ quality: 0, projects: 0, clients: 0 });
@@ -76,8 +76,9 @@ export default function About() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-16">
           <div className="inline-block mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-              ⭐ Why Choose Us
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
+              <Award className="w-4 h-4" />
+              Why Choose Us
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
