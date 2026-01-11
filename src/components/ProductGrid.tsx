@@ -114,6 +114,8 @@ export default function ProductGrid() {
       if (stored) {
         setProducts(JSON.parse(stored));
       }
+    } finally {
+      setLoading(false);
     }
   };
 
