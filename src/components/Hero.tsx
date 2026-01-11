@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
