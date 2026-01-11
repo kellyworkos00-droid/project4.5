@@ -1,4 +1,4 @@
-import { CheckCircle, Award, Shield, Sparkles } from "lucide-react";
+import { CheckCircle, Award, Shield, Sparkles, TrendingUp, Users, Truck } from "lucide-react";
 
 export default function About() {
   const features = [
@@ -70,7 +70,29 @@ export default function About() {
             Contact Us Now
           </a>
         </div>
-      </div>
+        {/* Trust Badges */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
+            <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
+            <p className="font-bold text-2xl text-gray-900">100%</p>
+            <p className="text-sm text-gray-600">Quality Guaranteed</p>
+          </div>
+          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
+            <TrendingUp className="w-12 h-12 text-blue-500 mx-auto mb-2" />
+            <p className="font-bold text-2xl text-gray-900">500+</p>
+            <p className="text-sm text-gray-600">Projects Completed</p>
+          </div>
+          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
+            <Users className="w-12 h-12 text-purple-500 mx-auto mb-2" />
+            <p className="font-bold text-2xl text-gray-900">300+</p>
+            <p className="text-sm text-gray-600">Happy Clients</p>
+          </div>
+          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
+            <Truck className="w-12 h-12 text-orange-500 mx-auto mb-2" />
+            <p className="font-bold text-2xl text-gray-900">Fast</p>
+            <p className="text-sm text-gray-600">Delivery Service</p>
+          </div>
+        </div>      </div>
     </section>
   );
 }
