@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MessageCircle, ArrowUp } from "lucide-react";
+import Newsletter from './Newsletter';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -21,6 +22,7 @@ export default function Footer() {
 
   return (
     <>
+    <Newsletter />
     {/* Back to Top Button */}
     {showBackToTop && (
       <button

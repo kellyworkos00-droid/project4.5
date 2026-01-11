@@ -124,6 +124,37 @@ export default function ProductGrid() {
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };
 
+  const addToCart = (product: Product, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find((item: { id: number }) => item.id === product.id);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      const images = getProductImages(product);
+      cart.push({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        image: images[0],
+        quantity: 1
+      });
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('storage'));
+    
+    // Visual feedback
+    const button = e.currentTarget as HTMLButtonElement;
+    button.textContent = '✓ Added!';
+    setTimeout(() => {
+      button.textContent = 'Add to Cart';
+    }, 1500);
+  };
+
   const nextImage = (productId: number, totalImages: number, e: React.MouseEvent) => {
     e.stopPropagation();
     setCurrentImageIndex(prev => ({
@@ -281,16 +312,21 @@ export default function ProductGrid() {
                   {product.description}
                 </p>
 
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-1 md:gap-0">
-                  <span className="text-xs md:text-2xl font-bold text-blue-600">
-                    {product.price}
-                  </span>
+                <div className="flex gap-2">
                   <button
-                    onClick={() => handleOrderClick(product.name)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 md:px-6 md:py-3 rounded-full text-[10px] md:text-base font-semibold flex items-center gap-1 md:gap-2 transition w-full md:w-auto justify-center"
+                    onClick={(e) => addToCart(product, e)}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 md:py-3 px-2 md:px-4 rounded-lg md:rounded-xl font-semibold text-xs md:text-base transition-all shadow-md hover:shadow-lg"
                   >
-                    <ShoppingCart size={12} className="md:w-[18px] md:h-[18px]" />
-                    Order
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleOrderClick(product.name);
+                    }}
+                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-1.5 md:py-3 px-2 md:px-4 rounded-lg md:rounded-xl font-semibold text-xs md:text-base transition-all shadow-md hover:shadow-lg"
+                  >
+                    WhatsApp
                   </button>
                 </div>
               </div>

@@ -21,11 +21,20 @@ export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const whatsappNumber = "254703771771";
 
   useEffect(() => {
     loadProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
+
+  useEffect(() => {
+    if (product) {
+      loadRelatedProducts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
 
   const loadProduct = async () => {
     try {
@@ -53,6 +62,48 @@ export default function ProductPage() {
     const message = `Hello! I'm interested in ordering: ${productName}`;
     const whatsappUrl = `https://wa.me/254703771771?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  const loadRelatedProducts = async () => {
+    try {
+      const response = await fetch('/api/products');
+      if (response.ok) {
+        const data = await response.json();
+        const related = data
+          .filter((p: Product) => 
+            p.id !== product?.id && 
+            p.category === product?.category
+          )
+          .slice(0, 3);
+        setRelatedProducts(related);
+      }
+    } catch (error) {
+      console.error('Failed to load related products:', error);
+    }
+  };
+
+  const addToCart = () => {
+    if (!product) return;
+    
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find((item: { id: number }) => item.id === product.id);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      const images = getProductImages(product);
+      cart.push({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        image: images[0],
+        quantity: 1
+      });
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('storage'));
+    alert('Added to cart!');
   };
 
   const nextImage = () => {
@@ -216,14 +267,22 @@ export default function ProductPage() {
                 </p>
               </div>
 
-              {/* Order Button */}
-              <button
-                onClick={() => handleOrderClick(product.name)}
-                className="w-full bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold flex items-center justify-center gap-3 transition transform hover:scale-105 shadow-lg"
-              >
-                <ShoppingCart size={24} />
-                Order via WhatsApp
-              </button>
+              {/* Order Buttons */}
+              <div className="space-y-3">
+                <button
+                  onClick={addToCart}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart size={24} />
+                  Add to Cart
+                </button>
+                <button
+                  onClick={() => handleOrderClick(product.name)}
+                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-4 px-6 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  Order via WhatsApp
+                </button>
+              </div>
 
               {/* Features */}
               <div className="bg-gray-50 rounded-xl p-6 space-y-3">
@@ -250,6 +309,39 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
+
+        {/* Related Products */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold mb-8 text-center">Related Products</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProducts.map((relatedProduct) => {
+                const images = getProductImages(relatedProduct);
+                return (
+                  <Link
+                    key={relatedProduct.id}
+                    href={`/product/${relatedProduct.id}`}
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                  >
+                    <img
+                      src={images[0]}
+                      alt={relatedProduct.name}
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl text-gray-800 mb-2">
+                        {relatedProduct.name}
+                      </h3>
+                      <p className="text-blue-600 font-semibold">
+                        {relatedProduct.category}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
