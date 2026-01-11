@@ -17,7 +17,7 @@ export default function Hero() {
           src="/lady.png"
           alt="Supacoat Products"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center transform scale-105 hover:scale-110 transition-transform duration-[3000ms]"
           priority
         />
         {/* Gradient overlay for depth and readability */}

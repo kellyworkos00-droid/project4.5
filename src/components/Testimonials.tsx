@@ -31,23 +31,37 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-20 bg-gradient-to-br from-blue-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500/20 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="inline-block mb-4">
+            <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+              💬 Testimonials
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-white drop-shadow-lg">
             What Our Clients Say
           </h2>
-          <p className="text-base md:text-xl text-gray-600">
+          <p className="text-base md:text-xl text-blue-100">
             Trusted by hundreds of satisfied customers across Kenya
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-8">
-          {testimonials.map((testimonial) => (
+          {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-white p-4 md:p-8 rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-6 md:p-8 rounded-2xl hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl hover:shadow-2xl"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
+              {/* Shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 rounded-2xl"></div>
               {/* Stars */}
               <div className="flex gap-1 mb-3 md:mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (

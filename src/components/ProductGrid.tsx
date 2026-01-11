@@ -250,17 +250,29 @@ export default function ProductGrid() {
             return (
               <div
                 key={product.id}
-                className="bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2"
+                className="group relative bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-2xl md:hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)] transition-all duration-500 transform hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02]"
+                style={{ perspective: '1000px' }}
               >
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 pointer-events-none z-10"></div>
               <Link href={`/product/${product.id}`}>
-              <div className="relative h-32 md:h-64 overflow-hidden group cursor-pointer">
+              <div className="relative h-32 md:h-64 overflow-hidden cursor-pointer">
                 <img
                   src={images[currentIndex]}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-blue-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold">
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Animated category badge */}
+                <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold shadow-lg animate-bounce-slow">
                   {product.category}
+                </div>
+                
+                {/* New badge */}
+                <div className="absolute top-1 left-1 md:top-4 md:left-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-bold shadow-lg">
+                  ⚡ HOT
                 </div>
                 
                 {/* Image Navigation */}
