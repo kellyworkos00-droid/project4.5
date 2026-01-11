@@ -4,6 +4,16 @@ A modern, responsive e-commerce website for Supacoat - wholesale hardware suppli
 
 Built with Next.js 15.5.9, TypeScript, Tailwind CSS, and Neon PostgreSQL.
 
+## Latest Features (v2.0)
+
+- 🔍 Real-time product search and category filters
+- 📱 Sticky navigation with smooth scrolling
+- ⬆️ Back-to-top button
+- 🎨 Enhanced UI with loading states and animations
+- 🏆 Trust badges showcasing business achievements
+- 💳 Individual product detail pages
+- 🎯 Improved contact cards with hover effects
+
 ## Features
 
 - 🎨 **Modern Design** - Clean, professional interface with smooth animations

@@ -54,10 +54,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Get Started</h4>
             <a
-              href={`https://wa.me/${whatsappNumber}`}
+              href={`https://wa.me/254${whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2 transition"
+              className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2 transition transform hover:scale-105"
             >
               <MessageCircle size={18} />
               Order on WhatsApp
