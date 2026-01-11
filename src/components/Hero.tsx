@@ -12,9 +12,19 @@ export default function Hero() {
   return (
     <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white overflow-hidden">
       {/* Sticky Navigation */}
-      <nav className=\"sticky top-0 bg-blue-900/95 backdrop-blur-md shadow-lg z-50 border-b border-blue-700/50\">
-      <div className=\"container mx-auto px-4 py-3 md:py-4\">
-        <div className=\"flex items-center justify-between\">\n          <div className=\"flex items-center gap-2\">\n            <Image\n              src=\"/logo.png\"\n              alt=\"Supacoat Logo\"\n              width={48}\n              height={48}\n              className=\"h-10 md:h-12 w-auto object-contain\"\n            />\n            <span className=\"text-lg md:text-xl font-bold\">SUPACOAT</span>\n          </div>
+      <nav className="sticky top-0 bg-blue-900/95 backdrop-blur-md shadow-lg z-50 border-b border-blue-700/50">
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Supacoat Logo"
+                width={48}
+                height={48}
+                className="h-10 md:h-12 w-auto object-contain"
+              />
+              <span className="text-lg md:text-xl font-bold">SUPACOAT</span>
+            </div>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
@@ -87,31 +97,6 @@ export default function Hero() {
             >
               <MessageCircle size={20} />
               Contact Us
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-            Your trusted partner for quality hardware, paints, coatings, and building materials. 
-            Serving contractors, builders, and businesses across Kenya with competitive wholesale prices.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <a
-              href="#products"
-              className="bg-white text-blue-900 hover:bg-blue-50 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg transition text-center"
-            >
-              Browse Products
-            </a>
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg transition flex items-center justify-center gap-2"
-            >
-              <ShoppingCart size={18} className="md:w-[22px] md:h-[22px]" />
-              WhatsApp Order
             </a>
           </div>
         </div>

@@ -1,9 +1,36 @@
-import { MessageCircle } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { MessageCircle, ArrowUp } from "lucide-react";
 
 export default function Footer() {
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const whatsappNumber = "0703771771";
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
+    <>
+    {/* Back to Top Button */}
+    {showBackToTop && (
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-20 right-4 md:bottom-8 md:right-8 bg-blue-600 hover:bg-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg transition-all transform hover:scale-110 z-40"
+        aria-label="Back to top"
+      >
+        <ArrowUp size={24} />
+      </button>
+    )}
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
