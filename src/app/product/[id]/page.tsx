@@ -22,7 +22,6 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
-  const whatsappNumber = "254703771771";
 
   useEffect(() => {
     loadProduct();

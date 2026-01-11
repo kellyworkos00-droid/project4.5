@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Star, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
