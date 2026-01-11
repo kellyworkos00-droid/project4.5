@@ -10,9 +10,22 @@ export default function Hero() {
   const whatsappMessage = encodeURIComponent("Hello! I'm interested in your coating products.");
 
   return (
-    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white overflow-hidden">
+    <div className="relative text-white overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/lady.png"
+          alt="Supacoat Products"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-800/70 to-slate-900/80"></div>
+      </div>
+
       {/* Sticky Navigation */}
-      <nav className="sticky top-0 bg-blue-900/95 backdrop-blur-md shadow-lg z-50 border-b border-blue-700/50">
+      <nav className="sticky top-0 bg-blue-900/95 backdrop-blur-md shadow-lg z-50 border-b border-blue-700/50 relative">
         <div className="container mx-auto px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -74,12 +87,12 @@ export default function Hero() {
       </nav>
 
       {/* Hero Content */}
-      <div className="container mx-auto px-4 py-16 md:py-32">
+      <div className="container mx-auto px-4 py-16 md:py-32 relative z-10">
         <div className="max-w-4xl">
-          <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in">
+          <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in drop-shadow-lg">
             Kenya's Leading Wholesale Hardware Supplier
           </h1>
-          <p className="text-lg md:text-2xl mb-6 md:mb-8 text-blue-100 leading-relaxed">
+          <p className="text-lg md:text-2xl mb-6 md:mb-8 text-blue-100 leading-relaxed drop-shadow-md">
             Premium quality paints, coatings, and building materials at competitive wholesale prices. Serving contractors and businesses nationwide.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
