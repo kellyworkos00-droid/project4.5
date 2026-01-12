@@ -14,6 +14,10 @@ interface Product {
   images?: string[];
   rating: number;
   category: string;
+  variants?: {
+    sizes?: Array<{ size: string; price: string }>;
+    colors?: string[];
+  };
 }
 
 export default function ProductPage() {
@@ -26,6 +30,9 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedColor, setSelectedColor] = useState<string>('');
+  const [selectedPrice, setSelectedPrice] = useState<string>('');
 
   useEffect(() => {
     loadProduct();
@@ -46,6 +53,18 @@ export default function ProductPage() {
         const data = await response.json();
         const foundProduct = data.find((p: Product) => p.id === Number(params.id));
         setProduct(foundProduct || null);
+        
+        // Set default selections
+        if (foundProduct?.variants?.sizes && foundProduct.variants.sizes.length > 0) {
+          setSelectedSize(foundProduct.variants.sizes[0].size);
+          setSelectedPrice(foundProduct.variants.sizes[0].price);
+        } else {
+          setSelectedPrice(foundProduct?.price || '');
+        }
+        
+        if (foundProduct?.variants?.colors && foundProduct.variants.colors.length > 0) {
+          setSelectedColor(foundProduct.variants.colors[0]);
+        }
       }
     } catch (error) {
       console.error('Failed to load product:', error);
@@ -348,7 +367,7 @@ export default function ProductPage() {
                 <p className="text-sm text-gray-600 mb-1">Price</p>
                 <div className="flex items-baseline gap-3">
                   <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    {product.price}
+                    {selectedPrice || product.price}
                   </p>
                   <span className="text-gray-500 text-sm">+ VAT</span>
                 </div>
@@ -357,6 +376,58 @@ export default function ProductPage() {
                   Free delivery on orders over KSh 5,000
                 </p>
               </div>
+
+              {/* Size Selector */}
+              {product.variants?.sizes && product.variants.sizes.length > 0 && (
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    Select Size
+                  </label>
+                  <div className="grid grid-cols-3 gap-3">
+                    {product.variants.sizes.map((variant) => (
+                      <button
+                        key={variant.size}
+                        onClick={() => {
+                          setSelectedSize(variant.size);
+                          setSelectedPrice(variant.price);
+                        }}
+                        className={`px-4 py-3 rounded-xl border-2 font-semibold transition-all ${
+                          selectedSize === variant.size
+                            ? 'border-blue-600 bg-blue-50 text-blue-600'
+                            : 'border-gray-300 hover:border-blue-400 text-gray-700'
+                        }`}
+                      >
+                        <div className="text-sm">{variant.size}</div>
+                        <div className="text-xs text-gray-600 mt-1">{variant.price}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Color Selector */}
+              {product.variants?.colors && product.variants.colors.length > 0 && (
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    Select Color
+                  </label>
+                  <div className="flex flex-wrap gap-3">
+                    {product.variants.colors.map((color) => (
+                      <button
+                        key={color}
+                        onClick={() => setSelectedColor(color)}
+                        className={`px-6 py-3 rounded-xl border-2 font-semibold transition-all ${
+                          selectedColor === color
+                            ? 'border-blue-600 bg-blue-50 text-blue-600'
+                            : 'border-gray-300 hover:border-blue-400 text-gray-700'
+                        }`}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Quantity Selector */}
               <div>
