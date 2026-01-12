@@ -109,13 +109,8 @@ export default function About() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-blue-900 to-blue-700 rounded-3xl p-12 text-white text-center">
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Stock Quality Hardware?
-          </h3>
-          <p className="text-xl mb-8 text-blue-100">
-            Get in touch with us today for wholesale pricing and bulk orders
-          </p>6">
+        {/* Trust Badges with Animated Counters */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           <div className="group relative bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50 p-4 md:p-6 rounded-xl md:rounded-2xl text-center transform hover:scale-110 hover:-rotate-2 transition-all duration-500 shadow-lg hover:shadow-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
             <CheckCircle className="w-10 h-10 md:w-12 md:h-12 text-blue-600 mx-auto mb-2 transform group-hover:rotate-12 transition-transform duration-500" />
@@ -137,19 +132,24 @@ export default function About() {
           <div className="group relative bg-gradient-to-br from-orange-50 via-orange-100 to-orange-50 p-4 md:p-6 rounded-xl md:rounded-2xl text-center transform hover:scale-110 hover:rotate-2 transition-all duration-500 shadow-lg hover:shadow-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400/0 via-orange-400/30 to-orange-400/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
             <Truck className="w-10 h-10 md:w-12 md:h-12 text-orange-600 mx-auto mb-2 transform group-hover:rotate-12 transition-transform duration-500" />
-            <h3 className="text-xl md:text-2xl font-bold text-orange-900 mb-1">⚡ Fast</h3>
-            <p className="text-xs md:text-sm text-orange-700 font-semibold">Same Day Delivery
-          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
-            <Users className="w-12 h-12 text-purple-500 mx-auto mb-2" />
-            <p className="font-bold text-2xl text-gray-900">300+</p>
-            <p className="text-sm text-gray-600">Happy Clients</p>
+            <h3 className="text-xl md:text-2xl font-bold text-orange-900 mb-1 flex items-center justify-center gap-1">
+              <Zap className="w-5 h-5 text-orange-600 fill-orange-600" />
+              Fast
+            </h3>
+            <p className="text-xs md:text-sm text-orange-700 font-semibold">Same Day Delivery</p>
           </div>
-          <div className="text-center p-4 bg-white/50 rounded-xl backdrop-blur-sm">
-            <Truck className="w-12 h-12 text-orange-500 mx-auto mb-2" />
-            <p className="font-bold text-2xl text-gray-900">Fast</p>
-            <p className="text-sm text-gray-600">Delivery Service</p>
-          </div>
-        </div>      </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-700 rounded-3xl p-8 md:p-12 text-white text-center">
+          <h3 className="text-2xl md:text-4xl font-bold mb-4">
+            Ready to Stock Quality Hardware?
+          </h3>
+          <p className="text-lg md:text-xl mb-6 md:mb-8 text-blue-100">
+            Get in touch with us today for wholesale pricing and bulk orders
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
