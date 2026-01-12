@@ -251,7 +251,7 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
         )}
 
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {[1, 2, 3, 4, 5, 6].map((n) => (
               <div key={n} className="bg-white rounded-lg md:rounded-2xl shadow-md overflow-hidden animate-pulse">
                 <div className="h-32 md:h-64 bg-gray-300"></div>
@@ -269,7 +269,7 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
             <p className="text-gray-500">Try adjusting your search or filters</p>
           </div>
         ) : (
-        <div className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8 transition-all duration-300 ${
+        <div className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 transition-all duration-300 ${
           isFilterAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
         }`}>
           {filteredProducts.map((product, index) => {

@@ -54,11 +54,11 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-6 md:p-8 rounded-2xl hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-4 md:p-8 rounded-2xl hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 shadow-xl hover:shadow-2xl"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Shine effect */}
@@ -75,7 +75,7 @@ export default function Testimonials() {
               </div>
 
               {/* Text */}
-              <p className="text-white/90 mb-4 md:mb-6 italic leading-relaxed text-base">
+              <p className="text-white/90 mb-3 md:mb-6 italic leading-relaxed text-sm md:text-base">
                 "{testimonial.text}"
               </p>
 

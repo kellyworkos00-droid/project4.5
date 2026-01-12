@@ -245,7 +245,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Products Grid */}
-          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 transition-opacity duration-300 ${isFilterAnimating ? 'opacity-50' : 'opacity-100'}`}>
+          <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8 transition-opacity duration-300 ${isFilterAnimating ? 'opacity-50' : 'opacity-100'}`}>
             {filteredProducts.map((product, index) => {
               const productImages = product.images || [product.image];
               const currentIndex = currentImageIndex[product.id] || 0;
