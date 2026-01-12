@@ -298,20 +298,24 @@ export default function ProductPage() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 p-6 md:p-12">
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div className="relative aspect-square rounded-2xl overflow-hidden group bg-gradient-to-br from-gray-100 to-gray-200">
+              <div className="relative aspect-square rounded-2xl overflow-hidden group bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
                 <img
                   src={images[currentImageIndex]}
                   alt={product.name}
-                  className={`w-full h-full object-cover transition-transform duration-500 ${
+                  className={`w-full h-full object-cover transition-all duration-700 ${
                     isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
                   }`}
                   onClick={() => setIsZoomed(!isZoomed)}
                 />
                 
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                
                 {/* Zoom hint */}
                 {!isZoomed && (
-                  <div className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
-                    <ZoomIn size={20} />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all shadow-lg flex items-center gap-2 transform translate-x-2 group-hover:translate-x-0">
+                    <ZoomIn size={18} />
+                    <span className="text-sm font-semibold">Click to zoom</span>
                   </div>
                 )}
                 
@@ -320,19 +324,67 @@ export default function ProductPage() {
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 p-3 rounded-full opacity-0 group-hover:opacity-100 transition shadow-lg"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-sm hover:bg-white text-gray-900 p-3 md:p-4 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-xl hover:shadow-2xl transform -translate-x-2 group-hover:translate-x-0 hover:scale-110"
                     >
                       <ChevronLeft size={24} />
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 p-3 rounded-full opacity-0 group-hover:opacity-100 transition shadow-lg"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-sm hover:bg-white text-gray-900 p-3 md:p-4 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-xl hover:shadow-2xl transform translate-x-2 group-hover:translate-x-0 hover:scale-110"
                     >
                       <ChevronRight size={24} />
                     </button>
                     
-                    {/* Image Counter */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    {/* Image Counter with progress */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md text-gray-900 px-6 py-3 rounded-full text-sm font-bold shadow-2xl flex items-center gap-3">
+                      <span>{currentImageIndex + 1} / {images.length}</span>
+                      {/* Progress dots */}
+                      <div className="flex gap-1.5">
+                        {images.map((_, idx) => (
+                          <div
+                            key={idx}
+                            className={`transition-all duration-300 rounded-full ${
+                              idx === currentImageIndex 
+                                ? 'w-6 h-2 bg-blue-600' 
+                                : 'w-2 h-2 bg-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnail Gallery */}
+              {images.length > 1 && (
+                <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-3">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      className={`group relative aspect-square rounded-xl overflow-hidden border-3 transition-all transform ${
+                        idx === currentImageIndex
+                          ? 'border-blue-600 scale-105 shadow-xl ring-2 ring-blue-200'
+                          : 'border-gray-200 hover:border-blue-400 hover:scale-105 shadow-md hover:shadow-lg'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${product.name} - View ${idx + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      {/* Active indicator */}
+                      {idx === currentImageIndex && (
+                        <div className="absolute inset-0 bg-blue-600/20 backdrop-blur-[1px]"></div>
+                      )}
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
                       {currentImageIndex + 1} / {images.length}
                     </div>
                   </>
