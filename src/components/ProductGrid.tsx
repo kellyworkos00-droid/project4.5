@@ -79,6 +79,7 @@ export default function ProductGrid() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [isFilterAnimating, setIsFilterAnimating] = useState(false);
 
   const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
   
@@ -89,6 +90,12 @@ export default function ProductGrid() {
     return matchesSearch && matchesCategory;
   });
   const whatsappNumber = "0703771771";
+
+  const handleCategoryChange = (category: string) => {
+    setIsFilterAnimating(true);
+    setSelectedCategory(category);
+    setTimeout(() => setIsFilterAnimating(false), 300);
+  };
 
   useEffect(() => {
     loadProducts();
@@ -187,7 +194,31 @@ export default function ProductGrid() {
           </p>
         </div>
 
-        {/* Search and Filter */}
+        {/* Category Filter Chips */}
+        <div className="mb-8 flex justify-center">
+          <div className="inline-flex flex-wrap gap-3 bg-white rounded-2xl p-2 shadow-lg">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform ${
+                  selectedCategory === category
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
+                }`}
+              >
+                {category}
+                {selectedCategory === category && (
+                  <span className="ml-2 inline-flex items-center justify-center w-6 h-6 bg-white text-blue-600 rounded-full text-xs font-bold">
+                    {filteredProducts.length}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Search Bar */}
         <div className="mb-8 flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -199,27 +230,17 @@ export default function ProductGrid() {
               className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800"
             />
           </div>
-          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition ${
-                  selectedCategory === category
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Results count */}
         {!loading && (
           <p className="text-center text-gray-600 mb-6">
             Showing {filteredProducts.length} of {products.length} products
+            {selectedCategory !== "All" && (
+              <span className="ml-2 text-blue-600 font-semibold">
+                in {selectedCategory}
+              </span>
+            )}
           </p>
         )}
 
@@ -242,16 +263,21 @@ export default function ProductGrid() {
             <p className="text-gray-500">Try adjusting your search or filters</p>
           </div>
         ) : (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
-          {filteredProducts.map((product) => {
+        <div className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8 transition-all duration-300 ${
+          isFilterAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+        }`}>
+          {filteredProducts.map((product, index) => {
             const images = getProductImages(product);
             const currentIndex = currentImageIndex[product.id] || 0;
             
             return (
               <div
                 key={product.id}
-                className="group relative bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-2xl md:hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)] transition-all duration-500 transform hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02]"
-                style={{ perspective: '1000px' }}
+                className="group relative bg-white rounded-lg md:rounded-2xl shadow-md md:shadow-lg overflow-hidden hover:shadow-2xl md:hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)] transition-all duration-500 transform hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02] animate-fade-in"
+                style={{ 
+                  perspective: '1000px',
+                  animationDelay: `${index * 50}ms`
+                }}
               >
                 {/* Shine effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 pointer-events-none z-10"></div>

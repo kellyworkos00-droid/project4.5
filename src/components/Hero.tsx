@@ -11,7 +11,7 @@ export default function Hero() {
 
   return (
     <div className="relative text-white overflow-hidden min-h-screen">
-      {/* Background Image with Overlay */}
+      {/* Background Image with Animated Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/lady.png"
@@ -20,11 +20,20 @@ export default function Hero() {
           className="object-cover object-center transform scale-105 hover:scale-110 transition-transform duration-[3000ms]"
           priority
         />
-        {/* Gradient overlay for depth and readability */}
+        {/* Dynamic gradient overlays with animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/85 to-transparent"></div>
-        {/* Animated gradient orbs */}
-        <div className="absolute top-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-80 h-80 bg-blue-500/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/20 to-blue-900/80 animate-pulse"></div>
+        
+        {/* Animated gradient orbs - Multiple layers */}
+        <div className="absolute top-20 right-10 w-96 h-96 bg-purple-500/30 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-80 h-80 bg-blue-500/30 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/20 rounded-full filter blur-3xl animate-pulse delay-500"></div>
+        
+        {/* Animated light rays effect */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-blue-400/50 via-transparent to-transparent transform -skew-x-12 animate-pulse"></div>
+          <div className="absolute top-0 right-1/3 w-1 h-full bg-gradient-to-b from-purple-400/50 via-transparent to-transparent transform skew-x-12 animate-pulse delay-700"></div>
+        </div>
       </div>
 
       {/* Sticky Navigation */}
