@@ -385,47 +385,6 @@ export default function ProductPage() {
                 </div>
               )}
             </div>
-                      {currentImageIndex + 1} / {images.length}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* Thumbnail Gallery */}
-              {images.length > 1 && (
-                <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-3">
-                  {images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentImageIndex(idx)}
-                      className={`aspect-square rounded-xl overflow-hidden border-2 transition-all transform ${
-                        idx === currentImageIndex
-                          ? 'border-blue-600 scale-105 shadow-lg'
-                          : 'border-gray-200 hover:border-blue-400 hover:scale-105'
-                      }`}
-                    >
-                      <img
-                        src={img}
-                        alt={`${product.name} - Image ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Trust Badges */}
-              <div className="grid grid-cols-2 gap-3 pt-4">
-                <div className="flex items-center gap-2 bg-green-50 text-green-700 p-3 rounded-xl">
-                  <CheckCircle size={20} />
-                  <span className="text-sm font-semibold">100% Authentic</span>
-                </div>
-                <div className="flex items-center gap-2 bg-blue-50 text-blue-700 p-3 rounded-xl">
-                  <Shield size={20} />
-                  <span className="text-sm font-semibold">Quality Guaranteed</span>
-                </div>
-              </div>
-            </div>
 
             {/* Product Info */}
             <div className="space-y-6">
