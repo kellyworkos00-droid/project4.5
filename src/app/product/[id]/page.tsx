@@ -188,10 +188,50 @@ export default function ProductPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading product...</p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Header Skeleton */}
+        <header className="bg-white shadow-sm">
+          <div className="container mx-auto px-4 py-4">
+            <div className="h-6 w-40 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        </header>
+
+        <div className="container mx-auto px-4 py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+            {/* Image Skeleton */}
+            <div className="space-y-4">
+              <div className="relative aspect-square bg-gray-200 rounded-3xl animate-pulse"></div>
+              <div className="grid grid-cols-5 gap-3">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="aspect-square bg-gray-200 rounded-xl animate-pulse"></div>
+                ))}
+              </div>
+            </div>
+
+            {/* Info Skeleton */}
+            <div className="space-y-6">
+              <div className="flex gap-3">
+                <div className="h-10 w-32 bg-gray-200 rounded-full animate-pulse"></div>
+                <div className="h-10 w-28 bg-gray-200 rounded-full animate-pulse"></div>
+              </div>
+              <div className="h-12 w-3/4 bg-gray-200 rounded-lg animate-pulse"></div>
+              <div className="flex gap-4">
+                <div className="h-6 w-32 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-6 w-24 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+              <div className="h-32 bg-gray-200 rounded-2xl animate-pulse"></div>
+              <div className="space-y-3">
+                <div className="h-6 w-20 bg-gray-200 rounded animate-pulse"></div>
+                <div className="flex gap-3">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="h-16 w-24 bg-gray-200 rounded-xl animate-pulse"></div>
+                  ))}
+                </div>
+              </div>
+              <div className="h-14 w-full bg-gray-200 rounded-xl animate-pulse"></div>
+              <div className="h-14 w-full bg-gray-200 rounded-xl animate-pulse"></div>
+            </div>
+          </div>
         </div>
       </div>
     );
