@@ -114,14 +114,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-2">
             <p className="text-gray-400 text-sm">
               &copy; {new Date().getFullYear()} Supacoat Investment Ltd. All rights reserved.
             </p>
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <span>Powered by</span>
-              <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Next.js</span>
-            </div>
           </div>
         </div>
       </div>
