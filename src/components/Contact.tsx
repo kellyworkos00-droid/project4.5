@@ -63,8 +63,8 @@ export default function Contact() {
               <MapPin className="w-6 h-6 md:w-10 md:h-10 text-white" />
             </div>
             <h3 className="text-sm md:text-xl font-bold mb-1 md:mb-2 text-gray-900 group-hover:text-red-600 transition">Location</h3>
-            <p className="text-gray-600 text-xs md:text-sm font-semibold">Kenya</p>
-            <p className="text-xs text-red-600 font-semibold mt-1 md:mt-2">Nationwide</p>
+            <p className="text-gray-600 text-[10px] md:text-xs font-semibold leading-tight">Ruiru, Kamakis<br />Eastern Bypass</p>
+            <p className="text-xs text-red-600 font-semibold mt-1 md:mt-2">Visit Us</p>
           </div>
         </div>
       </div>
