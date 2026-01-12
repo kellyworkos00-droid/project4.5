@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <Hero />
-        <ProductGrid />
+        <ProductGrid limit={6} />
         <About />
         <Testimonials />
         <Contact />

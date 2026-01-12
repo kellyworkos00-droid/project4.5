@@ -73,7 +73,7 @@ const defaultProducts: Product[] = [
   }
 ];
 
-export default function ProductGrid() {
+export default function ProductGrid({ limit }: { limit?: number } = {}) {
   const [products, setProducts] = useState<Product[]>(defaultProducts);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
   const [loading, setLoading] = useState(true);
@@ -83,12 +83,18 @@ export default function ProductGrid() {
 
   const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
   
-  const filteredProducts = products.filter(product => {
+  let filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          product.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // Apply limit if specified
+  if (limit) {
+    filteredProducts = filteredProducts.slice(0, limit);
+  }
+  
   const whatsappNumber = "0703771771";
 
   const handleCategoryChange = (category: string) => {
@@ -370,8 +376,24 @@ export default function ProductGrid() {
                 </div>
               </div>
             </div>
-            );
-          })}
+          );
+        })}
+        
+        {/* See More Button */}
+        {limit && products.length > limit && (
+          <div className="mt-12 text-center">
+            <Link 
+              href="/products"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            >
+              <span>See All Products</span>
+              <ChevronRight size={24} />
+            </Link>
+            <p className="mt-4 text-gray-600">
+              Showing {limit} of {products.length} products
+            </p>
+          </div>
+        )}
         </div>
         )}
       </div>

@@ -45,6 +45,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', id: '' },
     { name: 'Products', id: 'products' },
+    { name: 'All Products', href: '/products' },
     { name: 'About', id: 'about' },
     { name: 'Testimonials', id: 'testimonials' },
     { name: 'Contact', id: 'contact' }
@@ -81,17 +82,32 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => link.id ? scrollToSection(link.id) : window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className={`font-semibold transition-colors hover:text-blue-600 ${
-                    isScrolled ? 'text-gray-700' : 'text-white'
-                  }`}
-                >
-                  {link.name}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                if (link.href) {
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`font-semibold transition-colors hover:text-blue-600 ${
+                        isScrolled ? 'text-gray-700' : 'text-white'
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                }
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => link.id ? scrollToSection(link.id) : window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className={`font-semibold transition-colors hover:text-blue-600 ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Action Buttons */}
@@ -148,15 +164,29 @@ export default function Navbar() {
         style={{ top: '72px' }}
       >
         <div className="flex flex-col p-6 space-y-4">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => link.id ? scrollToSection(link.id) : window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-left text-xl font-semibold text-gray-900 hover:text-blue-600 transition py-3 border-b border-gray-100"
-            >
-              {link.name}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            if (link.href) {
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-left text-xl font-semibold text-gray-900 hover:text-blue-600 transition py-3 border-b border-gray-100"
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+            return (
+              <button
+                key={link.id}
+                onClick={() => link.id ? scrollToSection(link.id) : window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="text-left text-xl font-semibold text-gray-900 hover:text-blue-600 transition py-3 border-b border-gray-100"
+              >
+                {link.name}
+              </button>
+            );
+          })}
           <a
             href="https://wa.me/254703771771"
             target="_blank"
