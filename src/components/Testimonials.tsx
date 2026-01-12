@@ -75,7 +75,7 @@ export default function Testimonials() {
               </div>
 
               {/* Text */}
-              <p className="text-sm md:text-gray-700 mb-4 md:mb-6 italic leading-relaxed">
+              <p className="text-white/90 mb-4 md:mb-6 italic leading-relaxed text-base">
                 "{testimonial.text}"
               </p>
 
@@ -84,11 +84,11 @@ export default function Testimonials() {
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full"
+                  className="w-12 h-12 md:w-14 md:h-14 rounded-full ring-2 ring-white/30 shadow-lg"
                 />
                 <div>
-                  <h4 className="font-semibold text-sm md:text-base">{testimonial.name}</h4>
-                  <p className="text-xs md:text-sm text-gray-600">{testimonial.role}</p>
+                  <h4 className="font-bold text-base md:text-lg text-white">{testimonial.name}</h4>
+                  <p className="text-sm text-blue-200">{testimonial.role}</p>
                 </div>
               </div>
             </div>

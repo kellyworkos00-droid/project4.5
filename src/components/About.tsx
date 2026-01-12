@@ -94,15 +94,19 @@ export default function About() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="text-center p-6 rounded-xl hover:bg-blue-50 transition"
+              className="group relative bg-white p-8 rounded-2xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex justify-center mb-4">
+              {/* Hover gradient border effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+              
+              <div className="flex justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">
+              <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -141,13 +145,26 @@ export default function About() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-700 rounded-3xl p-8 md:p-12 text-white text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-4">
-            Ready to Stock Quality Hardware?
-          </h3>
-          <p className="text-lg md:text-xl mb-6 md:mb-8 text-blue-100">
-            Get in touch with us today for wholesale pricing and bulk orders
-          </p>
+        <div className="mt-16 relative overflow-hidden bg-gradient-to-r from-blue-900 via-purple-900 to-blue-900 rounded-3xl p-8 md:p-12 text-white text-center shadow-2xl">
+          {/* Animated background orbs */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          
+          <div className="relative z-10">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+              Ready to Stock Quality Hardware?
+            </h3>
+            <p className="text-lg md:text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+              Get in touch with us today for wholesale pricing and bulk orders
+            </p>
+            <a
+              href="#contact"
+              className="inline-block bg-white text-blue-900 px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            >
+              Get Started Now
+            </a>
+          </div>
+        </div>
         </div>
       </div>
     </section>
