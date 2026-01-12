@@ -80,8 +80,23 @@ export default function ProductPage() {
     return product.image ? [product.image] : [];
   };
 
-  const handleOrderClick = (productName: string) => {
-    const message = `Hello! I'm interested in ordering: ${productName}`;
+  const handleOrderClick = () => {
+    if (!product) return;
+    
+    let message = `Hello! I'm interested in ordering:\n\n`;
+    message += `📦 Product: ${product.name}\n`;
+    
+    if (selectedSize) {
+      message += `📏 Size: ${selectedSize}\n`;
+    }
+    
+    if (selectedColor) {
+      message += `🎨 Color: ${selectedColor}\n`;
+    }
+    
+    message += `🔢 Quantity: ${quantity}\n`;
+    message += `💰 Price: ${selectedPrice || product.price}\n`;
+    
     const whatsappUrl = `https://wa.me/254703771771?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -470,7 +485,7 @@ export default function ProductPage() {
                   Add to Cart
                 </button>
                 <button
-                  onClick={() => handleOrderClick(product.name)}
+                  onClick={handleOrderClick}
                   className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
