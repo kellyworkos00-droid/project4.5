@@ -15,10 +15,12 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/lady.png"
-          alt="Supacoat Products"
+          alt="Supacoat Products - Professional coating solutions"
           fill
           className="object-cover object-center transform scale-105 hover:scale-110 transition-transform duration-[3000ms]"
           priority
+          quality={90}
+          sizes="100vw"
         />
         {/* Dynamic gradient overlays with animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/85 to-transparent"></div>
@@ -71,7 +73,8 @@ export default function Hero() {
           <button
             className="md:hidden p-2 hover:bg-blue-800/50 rounded-lg transition"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

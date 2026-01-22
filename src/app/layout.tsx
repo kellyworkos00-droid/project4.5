@@ -3,8 +3,12 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Supacoat - Wholesale Hardware Supplier Kenya",
-  description: "Leading wholesale hardware supplier in Kenya. Quality paints, coatings, building materials and hardware at competitive prices. Serving contractors and businesses nationwide.",
+  title: "Supacoat - Wholesale Hardware Supplier Kenya | Quality Paints & Coatings",
+  description: "Leading wholesale hardware supplier in Kenya. Quality paints, coatings, building materials and hardware at competitive prices. Serving contractors and businesses nationwide. Fast delivery, expert support.",
+  keywords: ["wholesale hardware Kenya", "paint supplier", "coating supplier", "building materials", "industrial coatings", "Supacoat", "hardware store Kenya"],
+  authors: [{ name: "Supacoat Investment Ltd" }],
+  creator: "Supacoat Investment Ltd",
+  publisher: "Supacoat Investment Ltd",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -20,6 +24,29 @@ export const metadata: Metadata = {
     apple: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    title: "Supacoat - Wholesale Hardware Supplier Kenya",
+    description: "Leading wholesale hardware supplier. Quality paints, coatings & building materials at competitive prices.",
+    type: "website",
+    locale: "en_KE",
+    siteName: "Supacoat",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Supacoat - Wholesale Hardware Supplier Kenya",
+    description: "Quality paints, coatings & building materials at competitive prices.",
   },
 };
 

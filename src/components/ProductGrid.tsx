@@ -3,6 +3,7 @@
 import { Star, ChevronLeft, ChevronRight, Search, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import SkeletonLoader from "./SkeletonLoader";
 
 interface Product {
   id: number;
@@ -251,18 +252,7 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
         )}
 
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
-            {[1, 2, 3, 4, 5, 6].map((n) => (
-              <div key={n} className="bg-white rounded-lg md:rounded-2xl shadow-md overflow-hidden animate-pulse">
-                <div className="h-32 md:h-64 bg-gray-300"></div>
-                <div className="p-2 md:p-6 space-y-2 md:space-y-4">
-                  <div className="h-4 md:h-6 bg-gray-300 rounded w-3/4"></div>
-                  <div className="h-3 md:h-4 bg-gray-300 rounded w-1/2"></div>
-                  <div className="h-8 md:h-10 bg-gray-300 rounded"></div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <SkeletonLoader type="grid" />
         ) : filteredProducts.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-2xl text-gray-600 mb-4">No products found</p>
@@ -291,20 +281,21 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
               <div className="relative h-32 md:h-64 overflow-hidden cursor-pointer">
                 <img
                   src={images[currentIndex]}
-                  alt={product.name}
+                  alt={`${product.name} - ${product.description}`}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
                 />
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                 
                 {/* Animated category badge */}
-                <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold shadow-lg animate-bounce-slow">
+                <div className="absolute top-1 right-1 md:top-4 md:right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-semibold shadow-lg animate-bounce-slow" aria-label={`Category: ${product.category}`}>
                   {product.category}
                 </div>
                 
                 {/* New badge */}
-                <div className="absolute top-1 left-1 md:top-4 md:left-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-bold shadow-lg flex items-center gap-1">
-                  <Zap className="w-3 h-3 md:w-4 md:h-4 fill-white" />
+                <div className="absolute top-1 left-1 md:top-4 md:left-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-sm font-bold shadow-lg flex items-center gap-1" aria-label="Hot product">
+                  <Zap className="w-3 h-3 md:w-4 md:h-4 fill-white" aria-hidden="true" />
                   HOT
                 </div>
                 
@@ -314,24 +305,29 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
                     <button
                       onClick={(e) => prevImage(product.id, images.length, e)}
                       className="absolute left-1 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                      aria-label="Previous image"
                     >
                       <ChevronLeft size={16} className="md:w-6 md:h-6" />
                     </button>
                     <button
                       onClick={(e) => nextImage(product.id, images.length, e)}
                       className="absolute right-1 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                      aria-label="Next image"
                     >
                       <ChevronRight size={16} className="md:w-6 md:h-6" />
                     </button>
                     
                     {/* Image dots indicator */}
-                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1">
+                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1" role="tablist" aria-label="Image indicators">
                       {images.map((_, idx) => (
                         <div
                           key={idx}
                           className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition ${
                             idx === currentIndex ? 'bg-white' : 'bg-white/50'
                           }`}
+                          role="tab"
+                          aria-selected={idx === currentIndex}
+                          aria-label={`Image ${idx + 1} of ${images.length}`}
                         />
                       ))}
                     </div>
