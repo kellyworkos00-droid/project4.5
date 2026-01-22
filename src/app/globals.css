@@ -117,4 +117,11 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Hide elements when app is in standalone (PWA) mode */
+  @media (display-mode: standalone) {
+    .standalone\:hidden {
+      display: none !important;
+    }
+  }
 }
