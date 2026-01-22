@@ -10,12 +10,16 @@ import Navbar from "@/components/Navbar";
 import PageLoadingScreen from "@/components/PageLoadingScreen";
 import SocialProofBadges from "@/components/SocialProofBadges";
 import FloatingCTA from "@/components/FloatingCTA";
+import IOSInstallPrompt from "@/components/IOSInstallPrompt";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export default function Home() {
   return (
     <>
       <PageLoadingScreen />
       <Navbar />
+      <IOSInstallPrompt />
+      <PWAInstallPrompt />
       <main className="min-h-screen">
         <Hero />
         <SocialProofBadges />
