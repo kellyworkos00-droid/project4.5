@@ -15,14 +15,15 @@ export default function PageLoadingScreen() {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 10;
+        return prev + Math.random() * 15;
       });
-    }, 150);
+    }, 120);
 
     // Hide loading screen after animation
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+      setProgress(100);
+      setTimeout(() => setIsLoading(false), 400);
+    }, 1800);
 
     return () => {
       clearInterval(progressInterval);
@@ -43,44 +44,54 @@ export default function PageLoadingScreen() {
       {/* Content */}
       <div className="relative z-10 text-center">
         {/* Logo with animation */}
-        <div className="mb-8 animate-bounce">
-          <div className="relative w-32 h-32 mx-auto mb-4">
-            <Image
-              src="/logo.png"
-              alt="Supacoat Logo"
-              fill
-              className="object-contain"
-              priority
-            />
+        <div className="mb-8">
+          <div className="relative inline-block animate-fade-in">
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-2xl animate-pulse"></div>
+            {/* Logo container */}
+            <div className="relative bg-white rounded-3xl p-6 shadow-2xl transform hover:scale-105 transition-transform">
+              <div className="relative w-24 h-24 md:w-28 md:h-28">
+                <Image
+                  src="/logo.png"
+                  alt="Supacoat Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-            Supacoat
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-2 mt-6 tracking-tight animate-fade-in-up">
+            SUPACOAT
           </h1>
-          <p className="text-blue-200 text-lg">
-            Premium Hardware Solutions
+          <p className="text-blue-100 text-lg md:text-xl font-light animate-fade-in-up delay-200">
+            Wholesale Hardware Supplier
           </p>
         </div>
 
         {/* Loading bar */}
-        <div className="w-64 md:w-80 mx-auto">
+        <div className="w-64 md:w-80 mx-auto animate-fade-in-up delay-300">
           <div className="h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
             <div
-              className="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${progress}%` }}
+              className="h-full bg-gradient-to-r from-white via-blue-200 to-white rounded-full transition-all duration-300 ease-out"
+              style={{ 
+                width: `${Math.min(progress, 100)}%`,
+                boxShadow: '0 0 20px rgba(255, 255, 255, 0.6)'
+              }}
             >
               <div className="h-full w-full bg-white/30 animate-pulse"></div>
             </div>
           </div>
-          <p className="text-white/80 mt-3 text-sm font-semibold">
-            Loading... {progress}%
+          <p className="text-white/90 mt-3 text-sm font-semibold">
+            {Math.min(Math.floor(progress), 100)}%
           </p>
         </div>
 
         {/* Loading spinner */}
-        <div className="mt-6 flex justify-center gap-2">
-          <div className="w-3 h-3 bg-blue-400 rounded-full animate-bounce"></div>
-          <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-100"></div>
-          <div className="w-3 h-3 bg-blue-400 rounded-full animate-bounce delay-200"></div>
+        <div className="mt-6 flex justify-center gap-2 animate-fade-in-up delay-400">
+          <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+          <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-100"></div>
+          <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-200"></div>
         </div>
       </div>
     </div>
