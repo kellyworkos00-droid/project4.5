@@ -54,9 +54,25 @@ npm install
 npm run dev
 ```
 
-4. Open [http://localhost:3000](https://project4-5-1tz3.vercel.app/) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Configuration
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with your business information:
+
+```bash
+NEXT_PUBLIC_WHATSAPP_NUMBER=254703771771
+NEXT_PUBLIC_PHONE_NUMBER=0703771771
+NEXT_PUBLIC_EMAIL=supacoatinvestmentltd@gmail.com
+NEXT_PUBLIC_LOCATION=Kenya
+```
+
+⚠️ **IMPORTANT**: 
+- Copy `.env.example` to `.env.local` and update with your actual values
+- Never commit `.env.local` to version control
+- For production deployment, set these as environment variables in your hosting platform
 
 ### Admin Panel Access
 
@@ -76,21 +92,11 @@ npm run dev
 - ✅ Real-time updates on the main website
 - ✅ Product statistics dashboard
 
-### WhatsApp Number
-
-Update the WhatsApp number in the following files:
-- `src/components/Hero.tsx` (line 8)
-- `src/components/ProductGrid.tsx` (line 47)
-- `src/components/Contact.tsx` (line 7)
-- `src/components/Footer.tsx` (line 4)
-
-Replace `"1234567890"` with your actual WhatsApp number (include country code without + or spaces).
-
 ### Business Information
 
 Update business details in:
-- `src/components/Contact.tsx` - phone, email, location
-- `src/app/layout.tsx` - site metadata
+- Environment variables (`.env.local`) - recommended approach
+- `src/app/layout.tsx` - site metadata and SEO
 
 ### Products
 

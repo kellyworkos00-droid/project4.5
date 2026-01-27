@@ -3,9 +3,9 @@
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Contact() {
-  const whatsappNumber = "0703771771";
-  const phoneNumber = "0703771771";
-  const email = "supacoatinvestmentltd@gmail.com";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
+  const email = process.env.NEXT_PUBLIC_EMAIL || "supacoatinvestmentltd@gmail.com";
 
   return (
     <section id="contact" className="py-20 bg-gray-50">

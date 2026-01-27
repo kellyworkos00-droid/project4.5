@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
   const whatsappMessage = encodeURIComponent("Hello! I'm interested in your coating products.");
 
   return (

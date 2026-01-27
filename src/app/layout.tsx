@@ -77,17 +77,28 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://project4-5-1tz3.vercel.app'),
   openGraph: {
     title: "Supacoat - Wholesale Hardware Supplier Kenya",
     description: "Leading wholesale hardware supplier. Quality paints, coatings & building materials at competitive prices.",
     type: "website",
     locale: "en_KE",
     siteName: "Supacoat",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://project4-5-1tz3.vercel.app",
+    images: [
+      {
+        url: "/logo1.png",
+        width: 1200,
+        height: 630,
+        alt: "Supacoat - Leading Wholesale Hardware Supplier in Kenya"
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Supacoat - Wholesale Hardware Supplier Kenya",
     description: "Quality paints, coatings & building materials at competitive prices.",
+    images: ["/logo1.png"],
   },
 };
 
@@ -141,7 +152,7 @@ export default function RootLayout({
                       console.log('Service Worker registered:', registration.scope);
                     },
                     function(err) {
-                      console.log('Service Worker registration failed:', err);
+                      console.error('Service Worker registration failed:', err);
                     }
                   );
                 });

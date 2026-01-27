@@ -777,6 +777,44 @@ export default function ProductPage() {
           </div>
         )}
       </div>
+
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": product.name,
+            "description": product.description,
+            "image": images,
+            "sku": `SUPA-${product.id}`,
+            "brand": {
+              "@type": "Brand",
+              "name": "Supacoat"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": `${process.env.NEXT_PUBLIC_SITE_URL || 'https://project4-5-1tz3.vercel.app'}/product/${product.id}`,
+              "priceCurrency": "KES",
+              "price": product.price === "Contact for Price" ? "0" : product.price,
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "Supacoat Investment Ltd"
+              }
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": product.rating.toString(),
+              "bestRating": "5",
+              "worstRating": "1",
+              "ratingCount": "100"
+            },
+            "category": product.category
+          })
+        }}
+      />
     </div>
   );
 }

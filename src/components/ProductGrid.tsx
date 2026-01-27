@@ -3,6 +3,7 @@
 import { Star, ChevronLeft, ChevronRight, Search, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import SkeletonLoader from "./SkeletonLoader";
 
 interface Product {
@@ -74,7 +75,11 @@ const defaultProducts: Product[] = [
   }
 ];
 
-export default function ProductGrid({ limit }: { limit?: number } = {}) {
+interface ProductGridProps {
+  limit?: number;
+}
+
+export default function ProductGrid({ limit }: ProductGridProps = {}) {
   const [products, setProducts] = useState<Product[]>(defaultProducts);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
   const [loading, setLoading] = useState(true);
@@ -96,7 +101,7 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
     filteredProducts = filteredProducts.slice(0, limit);
   }
   
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   const handleCategoryChange = (category: string) => {
     setIsFilterAnimating(true);
@@ -107,8 +112,8 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
   useEffect(() => {
     loadProducts();
     
-    // Refresh products every 5 seconds to catch updates
-    const interval = setInterval(loadProducts, 5000);
+    // Refresh products every 30 seconds for admin updates (reduced from 5s for better performance)
+    const interval = setInterval(loadProducts, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -279,11 +284,12 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 pointer-events-none z-10"></div>
               <Link href={`/product/${product.id}`}>
               <div className="relative h-32 md:h-64 overflow-hidden cursor-pointer">
-                <img
+                <Image
                   src={images[currentIndex]}
                   alt={`${product.name} - ${product.description}`}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
+                  fill
+                  className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>

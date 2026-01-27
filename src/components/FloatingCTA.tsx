@@ -18,8 +18,8 @@ export default function FloatingCTA() {
 
   if (!isVisible) return null;
 
-  const whatsappNumber = "0703771771";
-  const phoneNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   return (
     <div className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40">

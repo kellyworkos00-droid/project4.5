@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { MessageCircle, ArrowUp } from "lucide-react";
+import Image from "next/image";
 import Newsletter from './Newsletter';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +45,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <div className="md:col-span-2">
-            <img src="/logo.png" alt="Supacoat Logo" className="h-14 w-auto mb-6 drop-shadow-lg" />
+            <Image 
+              src="/logo.png" 
+              alt="Supacoat Logo - Leading Wholesale Hardware Supplier in Kenya" 
+              width={112} 
+              height={56} 
+              className="h-14 w-auto mb-6 drop-shadow-lg" 
+            />
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
               Kenya's trusted wholesale hardware supplier. Quality products, 
               competitive prices, exceptional service for contractors and businesses.
