@@ -77,14 +77,14 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  metadataBase: new URL('https://project4-5-1tz3.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://project4-5-1tz3.vercel.app'),
   openGraph: {
     title: "Supacoat - Wholesale Hardware Supplier Kenya",
     description: "Leading wholesale hardware supplier. Quality paints, coatings & building materials at competitive prices.",
     type: "website",
     locale: "en_KE",
     siteName: "Supacoat",
-    url: "https://project4-5-1tz3.vercel.app",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://project4-5-1tz3.vercel.app",
     images: [
       {
         url: "/logo1.png",

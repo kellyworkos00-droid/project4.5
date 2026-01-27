@@ -795,7 +795,7 @@ export default function ProductPage() {
             },
             "offers": {
               "@type": "Offer",
-              "url": `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL || 'https://project4-5-1tz3.vercel.app'}/product/${product.id}`,
+              "url": `${process.env.NEXT_PUBLIC_SITE_URL || 'https://project4-5-1tz3.vercel.app'}/product/${product.id}`,
               "priceCurrency": "KES",
               "price": product.price === "Contact for Price" ? "0" : product.price,
               "availability": "https://schema.org/InStock",
