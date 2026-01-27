@@ -149,14 +149,10 @@ export default function RootLayout({
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(
                     function(registration) {
-                      if (typeof console !== 'undefined' && console.log) {
-                        console.log('Service Worker registered:', registration.scope);
-                      }
+                      console.log('Service Worker registered:', registration.scope);
                     },
                     function(err) {
-                      if (typeof console !== 'undefined' && console.error) {
-                        console.error('Service Worker registration failed:', err);
-                      }
+                      console.error('Service Worker registration failed:', err);
                     }
                   );
                 });
