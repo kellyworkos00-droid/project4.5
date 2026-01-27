@@ -6,7 +6,7 @@ import Newsletter from './Newsletter';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   useEffect(() => {
     const handleScroll = () => {

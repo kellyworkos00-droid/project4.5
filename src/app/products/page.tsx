@@ -89,7 +89,7 @@ export default function ProductsPage() {
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   const handleCategoryChange = (category: string) => {
     setIsFilterAnimating(true);

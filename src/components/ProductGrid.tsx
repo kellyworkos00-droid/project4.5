@@ -96,7 +96,7 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
     filteredProducts = filteredProducts.slice(0, limit);
   }
   
-  const whatsappNumber = "0703771771";
+  const whatsappNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "0703771771";
 
   const handleCategoryChange = (category: string) => {
     setIsFilterAnimating(true);
@@ -107,8 +107,8 @@ export default function ProductGrid({ limit }: { limit?: number } = {}) {
   useEffect(() => {
     loadProducts();
     
-    // Refresh products every 5 seconds to catch updates
-    const interval = setInterval(loadProducts, 5000);
+    // Refresh products every 30 seconds for admin updates (reduced from 5s for better performance)
+    const interval = setInterval(loadProducts, 30000);
     return () => clearInterval(interval);
   }, []);
 
