@@ -1,6 +1,7 @@
 "use client";
 
 import { Star, MessageSquare } from 'lucide-react';
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -81,9 +82,11 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3 md:gap-4">
-                <img
+                <Image
                   src={testimonial.image}
-                  alt={testimonial.name}
+                  alt={`${testimonial.name} - ${testimonial.role}`}
+                  width={56}
+                  height={56}
                   className="w-12 h-12 md:w-14 md:h-14 rounded-full ring-2 ring-white/30 shadow-lg"
                 />
                 <div>

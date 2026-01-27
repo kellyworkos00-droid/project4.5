@@ -3,6 +3,7 @@
 import { Star, ChevronLeft, ChevronRight, Search, Zap, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -257,10 +258,12 @@ export default function ProductsPage() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <img
+                    <Image
                       src={productImages[currentIndex]}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       onError={(e) => {
                         e.currentTarget.src = "https://via.placeholder.com/300x200?text=Product+Image";
                       }}
